@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import todoReducer from './TodoReducer';
+import listReducer from './ListReducer';
 
 export const store = configureStore({
   reducer: {
-    reducer: todoReducer,
+    todoReducer,
+    listReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // place for your middleware if you want
 });

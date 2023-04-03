@@ -1,21 +1,22 @@
 import {ChangeEventHandler, KeyboardEventHandler} from 'react';
+import {Input} from '@chakra-ui/react';
+import {Status} from '../interface/todo';
 
-interface TodoItemProps {
+interface TodoDescProps {
   description?: string;
-  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
-  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
-  completed?: boolean;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  status?: Status;
 }
 
-function TodoDescription(props: TodoItemProps) {
+function TodoDescription(props: TodoDescProps) {
   return (
-    <textarea
+    <Input
+      style={{paddingLeft: '40px'}}
       value={props.description}
       onKeyDown={props.onKeyDown}
       onChange={props.onChange}
-      rows={1}
-      placeholder="Add new todo..."
-      disabled={props.completed}
+      disabled={props.status === 'completed'}
     />
   );
 }
