@@ -1,5 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {useTranslation} from 'react-i18next';
+import Header from './components/Header';
+import TodoList from './pages/TodoList';
 
 function App() {
   const {i18n, t} = useTranslation();
@@ -13,11 +15,8 @@ function App() {
       >
         <meta name="description" content={t('app.description')} />
       </Helmet>
-
-      <h1>Welcome to Carvago Front-End Assignment</h1>
-      {/**
-       * continue
-       */}
+      <Header />
+      <TodoList />
     </>
   );
 }

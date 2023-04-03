@@ -28,6 +28,20 @@ const theme = extendTheme({
         color: 'white',
         borderRadius: '4px',
       }),
+      variants: () => ({
+        primary: () => ({
+          bg: 'unset',
+          backgroundColor: 'pink',
+          color: 'white',
+          borderRadius: '4px',
+        }),
+        secondary: () => ({
+          bg: 'unset',
+          backgroundColor: 'blue',
+          color: 'white',
+          borderRadius: '4px',
+        }),
+      }),
     },
   },
 });
