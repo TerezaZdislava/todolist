@@ -6,17 +6,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store';
 import {removeList, updateListDescription, addList} from '../ListReducer';
 import {List} from '../interface/todo';
-import TodoDescription from '../components/TodoDescription';
+import TodoDescription from '../components/TitleInput';
 import {TextChange} from 'typescript';
 import TodoItem from '../features/TodoItem';
 import TodoCard from '../features/Card';
 import TodoListHeader from '../components/TodoListHeader';
 
 function TodoList(props: any) {
-  //React Hooks
   const [listDescription, setListDescription] = useState('');
-
-  //React Redux Hooks
   const todoList = useSelector((state: RootState) => state.listReducer);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -37,18 +34,24 @@ function TodoList(props: any) {
       <TodoListHeader today={today} />
       <Divider orientation="horizontal" ml={4} mr={4} w="auto" />
       {/* <div> */}
-      <SimpleGrid m={3} spacing={4} templateColumns="repeat(auto-fill, minmax(250px, 1fr))">
+      <SimpleGrid m={3} spacing={4} templateColumns="repeat(auto-fill, minmax(300px, 1fr))">
         {todoList.map((list: List) => (
           <TodoCard {...list} key={list.id} />
         ))}
-        <Input
-          onChange={(e) => setListDescription(e.target.value)}
-          value={listDescription}
-          placeholder="Add item"
-        />
-        <Button variant="contained" color="primary" onClick={() => addTodoList()}>
-          Add Todo List
-        </Button>
+        <div>
+          <Input
+            onChange={(e) => setListDescription(e.target.value)}
+            value={listDescription}
+            placeholder="Add item"
+            style={{borderColor: '#B3BAC5', backgroundColor: 'white'}}
+          />
+          <Button variant="contained" color="primary" onClick={() => addTodoList()}>
+            Cancel
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => addTodoList()}>
+            Add Todo List
+          </Button>
+        </div>
       </SimpleGrid>
       {/* </div> */}
     </>

@@ -35,8 +35,13 @@ const todoReducer = createSlice({
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].status = action.payload.status;
     },
+    changePriority(state, action: PayloadAction<{priority: boolean; id: string}>) {
+      const index = state.findIndex((todo) => todo.id === action.payload.id);
+      state[index].priority = action.payload.priority;
+    },
   },
 });
 
-export const {addTodo, removeTodo, changeStatus, updateDescription} = todoReducer.actions;
+export const {addTodo, removeTodo, changePriority, changeStatus, updateDescription} =
+  todoReducer.actions;
 export default todoReducer.reducer;

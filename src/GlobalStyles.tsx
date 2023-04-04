@@ -31,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
      font-size: 100%;
      font: inherit;
      vertical-align: baseline;
-     background-color: #E5E5E5;
      color: #091E42;
    }
    html, body, #root{
@@ -61,7 +60,6 @@ const GlobalStyle = createGlobalStyle`
      border-collapse: collapse;
      border-spacing: 0;
    }
-
    body {
      line-height: 1;
      margin: 0;
@@ -69,6 +67,13 @@ const GlobalStyle = createGlobalStyle`
      font-family: Open-Sans, Helvetica, Sans-Serif;
      font-size: 16px;
      height: 100%;
+     background-color: #E5E5E5;
+   }
+   input:focus-visible {
+      outline: none;
+   }
+   .chakra-checkbox__control > div {
+    background-color: #3182ce;
    }
  `;
 

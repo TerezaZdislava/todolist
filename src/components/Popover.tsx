@@ -16,7 +16,14 @@ interface Props {
   dataType?: 'list' | 'task';
   allDone?: MouseEventHandler<HTMLButtonElement>;
   delete?: MouseEventHandler<HTMLButtonElement>;
+  changePriority?: MouseEventHandler<HTMLButtonElement>;
 }
+
+const itemStyle = {
+  padding: '8px',
+  border: '1px solid #DFE1E6',
+  borderRadius: '8px',
+};
 
 function MyPopover(props: Props) {
   return (
@@ -24,7 +31,7 @@ function MyPopover(props: Props) {
       <PopoverTrigger>
         <IconButton aria-label="Search database" icon={<HandleIconn />} variant="primary" />
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent style={itemStyle}>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader>Confirmation!</PopoverHeader>
@@ -38,6 +45,17 @@ function MyPopover(props: Props) {
                 onClick={props.allDone}
               />
               <Text>Mark all as done</Text>
+            </div>
+          ) : null}
+          {props.dataType === 'task' ? (
+            <div>
+              <IconButton
+                aria-label="Search database"
+                icon={<HandleIconn />}
+                variant="primary"
+                onClick={props.changePriority}
+              />
+              <Text>Change priority</Text>
             </div>
           ) : null}
           <IconButton

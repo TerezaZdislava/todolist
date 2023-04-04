@@ -1,5 +1,5 @@
-import {StrictMode} from 'react';
-import ReactDOM from 'react-dom';
+// import {StrictMode} from 'react';
+// import ReactDOM from 'react-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {Provider} from 'react-redux';
 import App from './App';
@@ -9,11 +9,12 @@ import {store} from './store';
 import './i18n/i18n';
 import {ChakraProvider} from '@chakra-ui/react';
 import theme from './theme';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-const MOUNT_NODE = document.getElementById('root') as HTMLElement;
-
-ReactDOM.render(
-  <StrictMode>
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <React.StrictMode>
     <Provider store={store}>
       <ChakraProvider theme={theme} resetCSS>
         <HelmetProvider>
@@ -23,6 +24,7 @@ ReactDOM.render(
         </HelmetProvider>
       </ChakraProvider>
     </Provider>
-  </StrictMode>,
-  MOUNT_NODE
+  </React.StrictMode>
 );
+
+// reportWebVitals();

@@ -2,17 +2,24 @@ import {ChangeEventHandler, KeyboardEventHandler} from 'react';
 import {Input} from '@chakra-ui/react';
 import {Status} from '../interface/todo';
 
-interface TodoDescProps {
+interface TitleProps {
   description?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   status?: Status;
+  type?: 'task' | 'title';
 }
 
-function TodoDescription(props: TodoDescProps) {
+function TitleInput(props: TitleProps) {
+  const itemStyle = {
+    paddingLeft: '10px',
+    background: 'transparent',
+    fontWeight: props.type === 'title' ? '600' : 'auto',
+  };
+
   return (
-    <Input
-      style={{paddingLeft: '40px'}}
+    <input
+      style={itemStyle}
       value={props.description}
       onKeyDown={props.onKeyDown}
       onChange={props.onChange}
@@ -21,4 +28,4 @@ function TodoDescription(props: TodoDescProps) {
   );
 }
 
-export default TodoDescription;
+export default TitleInput;
