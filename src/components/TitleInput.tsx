@@ -12,6 +12,7 @@ interface TitleProps {
 function TitleInput(props: TitleProps) {
   const itemStyle = {
     paddingLeft: '10px',
+    width: '90%',
     background: 'transparent',
     fontWeight: props.type === 'title' ? '600' : 'auto',
     whiteSpace: 'nowrap',
