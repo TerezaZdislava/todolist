@@ -1,5 +1,4 @@
 import {ChangeEventHandler, KeyboardEventHandler} from 'react';
-import {Input} from '@chakra-ui/react';
 import {Status} from '../interface/todo';
 
 interface TitleProps {

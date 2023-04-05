@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {AppDispatch, RootState} from '../store';
-import {removeList, updateListDescription, addList, resetLists} from '../ListReducer';
+import {addList, resetLists} from '../ListReducer';
 import {removeTodo, resetTodos} from '../TodoReducer';
 import {Filter, List, Todo} from '../interface/todo';
 
@@ -15,7 +15,7 @@ import {ReactComponent as SettingsIcon} from '../assets/icons/settings.svg';
 import {ReactComponent as MenuIcon} from '../assets/icons/menu.svg';
 import CreateList from '../components/CreateList';
 
-function TodoList(props: any) {
+function TodoList() {
   const [listDescription, setListDescription] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
   const todoList = useSelector((state: RootState) => state.listReducer);
