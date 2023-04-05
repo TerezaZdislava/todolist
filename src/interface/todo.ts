@@ -1,5 +1,6 @@
 export type Status = 'active' | 'completed';
 export type Filter = 'all' | Status;
+export type Priority = 'low' | 'medium' | 'high';
 
 export interface Todo {
   id: string;
@@ -8,7 +9,7 @@ export interface Todo {
   description: string;
   completed: boolean;
   status: Status;
-  priority: boolean;
+  priority: Priority;
   timeCreated: string;
 }
 export interface List {

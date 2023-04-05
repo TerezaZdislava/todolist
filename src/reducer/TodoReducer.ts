@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Status, Todo} from '../interface/todo';
+import {Priority, Status, Todo} from '../interface/todo';
 
 const initialState = [] as Todo[];
 const {v4: uuidv4} = require('uuid');
@@ -22,7 +22,7 @@ const todoReducer = createSlice({
           description: '',
           listId,
           status: 'active',
-          priority: false,
+          priority: 'medium',
           completed: false,
           timeCreated: time,
           title,
@@ -48,7 +48,7 @@ const todoReducer = createSlice({
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].status = action.payload.status;
     },
-    changePriority(state, action: PayloadAction<{priority: boolean; id: string}>) {
+    changePriority(state, action: PayloadAction<{priority: Priority; id: string}>) {
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].priority = action.payload.priority;
     },

@@ -1,5 +1,5 @@
 import TitleInput from '../components/TitleInput';
-import {Todo} from '../interface/todo';
+import {Priority, Todo} from '../interface/todo';
 import {
   changePriority,
   changeStatus,
@@ -12,9 +12,11 @@ import {AppDispatch} from '../store';
 import {Checkbox} from '@chakra-ui/react';
 import TaskEdit from '../components/TaskEdit';
 import {ReactComponent as HandleIconn} from '../assets/icons/handle.svg';
+import {useState} from 'react';
 
 function TodoItem(todo: Todo) {
   const dispatch = useDispatch<AppDispatch>();
+  const [priorityColor, setPriorityColor] = useState('#FF9800');
 
   function handleTitleChange(e: any, taskid: string) {
     if (!e.target.value) {
@@ -32,22 +34,38 @@ function TodoItem(todo: Todo) {
     }
   }
 
-  function handlePriorityChange(e: boolean, id: string) {
-    if (!e) {
-      dispatch(changePriority({priority: false, id}));
-    } else {
-      dispatch(changePriority({priority: true, id}));
-    }
+  function handlePriorityChange(e: Priority, taskid: string) {
+    console.log('priority ' + e);
+    dispatch(changePriority({priority: e, id: taskid}));
+    changePriorityColor(e);
   }
+
   const itemStyle = {
     padding: '10px',
     display: 'flex',
     marginBottom: '8px',
     border: '1px solid #DFE1E6',
-    borderLeft: `2px solid ${todo.priority ? '#E32C1E' : '#24A148'}`,
+    borderLeft: `2px solid ${priorityColor}`,
     borderRadius: '5px',
     alignItems: 'center',
   };
+
+  function changePriorityColor(priority: Priority) {
+    console.log('priority ' + priority);
+    switch (priority) {
+      case 'low':
+        setPriorityColor('#24A148');
+        break;
+      case 'medium':
+        setPriorityColor('#FF9800');
+        break;
+      case 'high':
+        setPriorityColor('#E32C1E');
+        break;
+      default:
+        setPriorityColor('#FF9800');
+    }
+  }
 
   return (
     <div key={todo.id} style={itemStyle}>
@@ -74,7 +92,7 @@ function TodoItem(todo: Todo) {
           dispatch(updateDescription({description: e.target.value, id: todo.id}))
         }
         onTitleChange={(e: any) => dispatch(updateTitle({title: e.target.value, id: todo.id}))}
-        changePriority={(e: any) => handlePriorityChange(e.target.checked, todo.id)}
+        changePriority={(e: any) => handlePriorityChange(e.target.value, todo.id)}
         delete={() => dispatch(removeTodo(todo.id))}
         // priority={todo.priority}
       />

@@ -13,6 +13,7 @@ const withPopover = (Component: React.FunctionComponent) => (props: any) => {
     padding: '20px 8px 5px 8px',
     border: '1px solid #DFE1E6',
     borderRadius: '8px',
+    width: '100%',
   };
 
   return (
