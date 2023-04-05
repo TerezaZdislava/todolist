@@ -72,6 +72,9 @@ const GlobalStyle = createGlobalStyle`
    input:focus-visible {
       outline: none;
    }
+   input[type=text].headingInput {
+      font-size: 16px;
+    }
    .chakra-checkbox__control > div {
     background-color: #3182ce;
    }
