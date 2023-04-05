@@ -67,7 +67,7 @@ const GlobalStyle = createGlobalStyle`
      font-family: Open-Sans, Helvetica, Sans-Serif;
      font-size: 16px;
      height: 100%;
-     background-color: #E5E5E5;
+     background-color: #F4F5F7;
    }
    input:focus-visible {
       outline: none;

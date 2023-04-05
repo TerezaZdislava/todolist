@@ -7,23 +7,32 @@ import {Todo, List, Filter} from '../interface/todo';
 import TitleInput from '../components/TitleInput';
 import {useEffect, useState} from 'react';
 import {removeList, updateListDescription} from '../ListReducer';
-import MyPopover from '../components/Popover';
 import CardTabs from '../components/CardTabs';
+import CardEdit from '../components/CardEdit';
+import {ReactComponent as HandleIconn} from '../assets/icons/handle.svg';
+interface CardProps extends List {
+  filter: Filter;
+}
 
-function TodoCard(props: List) {
+function TodoCard(props: CardProps) {
   const dispatch = useDispatch<AppDispatch>();
   const tasks = useSelector((state: RootState) => state.todoReducer);
   const [taskDescription, setTaskDescription] = useState('');
   const [filteredTasks, setFilteredTasks] = useState<Todo[]>([]);
-  const [filter, setFilter] = useState<Filter>('all');
+  const [filter, setFilter] = useState<Filter>(props.filter);
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
-    console.log('filter ' + filter);
+    setFilter(props.filter);
+  }, [props.filter]);
+
+  useEffect(() => {
+    const listTasks = tasks.filter((task: Todo) => task.listId === props.id);
     const newfilteredTasks =
-      filter === 'all' ? tasks : tasks.filter((task) => task.status === filter);
+      filter === 'all' ? listTasks : listTasks.filter((task) => task.status === filter);
     setFilteredTasks(newfilteredTasks);
-    console.log('newfilteredTasks ' + newfilteredTasks);
-  }, [props, filter, tasks]);
+    updateTabs();
+  }, [filter, tasks]);
 
   function addTask(listId: string) {
     if (taskDescription === '') {
@@ -34,10 +43,26 @@ function TodoCard(props: List) {
     }
   }
 
+  function updateTabs() {
+    switch (filter) {
+      case 'all':
+        setTabIndex(0);
+        break;
+      case 'active':
+        setTabIndex(1);
+        break;
+      case 'completed':
+        setTabIndex(2);
+        break;
+      default:
+        setTabIndex(0);
+    }
+  }
+
   function allTasksDone(listId: string) {
     tasks
       .filter((task: Todo) => task.listId === listId)
-      .forEach((task) => dispatch(changeStatus({status: 'completed', id: task.id})));
+      .forEach((task: Todo) => dispatch(changeStatus({status: 'completed', id: task.id})));
   }
 
   function handleTitleChange(e: any, id: string) {
@@ -51,7 +76,6 @@ function TodoCard(props: List) {
   const itemStyle = {
     backgroundColor: 'white',
     height: 'fit-content',
-    width: 'fit-content',
     border: '1px solid ##DFE1E6',
     borderRadius: '5px',
   };
@@ -63,19 +87,17 @@ function TodoCard(props: List) {
           description={props.description}
           onChange={(e) => handleTitleChange(e, props.id)}
         />
-        <MyPopover
+        <CardEdit
+          icon={<HandleIconn />}
           delete={() => dispatch(removeList(props.id))}
           allDone={() => allTasksDone(props.id)}
-          dataType="list"
         />
       </CardHeader>
-      <CardTabs onClick={(e: Filter) => setFilter(e)} />
+      <CardTabs tabIndex={tabIndex} onClick={(e: Filter) => setFilter(e)} />
       <CardBody>
-        {filteredTasks
-          .filter((task: Todo) => task.listId === props.id)
-          .map((filteredTask) => (
-            <TodoItem {...filteredTask} key={filteredTask.id} />
-          ))}
+        {filteredTasks.map((filteredTask) => (
+          <TodoItem {...filteredTask} key={filteredTask.id} />
+        ))}
       </CardBody>
 
       <CardFooter>

@@ -27,6 +27,9 @@ const todoReducer = createSlice({
       const index = state.findIndex((todo) => todo.id === action.payload);
       state.splice(index, 1);
     },
+    resetTodos() {
+      return initialState;
+    },
     updateDescription(state, action: PayloadAction<{description: string; id: string}>) {
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].description = action.payload.description;
@@ -42,6 +45,6 @@ const todoReducer = createSlice({
   },
 });
 
-export const {addTodo, removeTodo, changePriority, changeStatus, updateDescription} =
+export const {addTodo, resetTodos, removeTodo, changePriority, changeStatus, updateDescription} =
   todoReducer.actions;
 export default todoReducer.reducer;

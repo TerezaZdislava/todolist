@@ -15,10 +15,13 @@ function TitleInput(props: TitleProps) {
     paddingLeft: '10px',
     background: 'transparent',
     fontWeight: props.type === 'title' ? '600' : 'auto',
-  };
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+  } as React.CSSProperties;
 
   return (
     <input
+      type="text"
       style={itemStyle}
       value={props.description}
       onKeyDown={props.onKeyDown}

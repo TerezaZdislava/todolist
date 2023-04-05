@@ -24,23 +24,9 @@ const theme = extendTheme({
     Button: {
       baseStyle: () => ({
         bg: 'unset',
-        backgroundColor: '#0065FF',
-        color: 'white',
+        backgroundColor: '#EBECF0',
+        color: 'black',
         borderRadius: '4px',
-      }),
-      variants: () => ({
-        primary: () => ({
-          bg: 'unset',
-          backgroundColor: 'pink',
-          color: 'white',
-          borderRadius: '4px',
-        }),
-        secondary: () => ({
-          bg: 'unset',
-          backgroundColor: 'blue',
-          color: 'white',
-          borderRadius: '4px',
-        }),
       }),
     },
   },

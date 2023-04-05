@@ -23,6 +23,10 @@ const listReducer = createSlice({
       const index = state.findIndex((list) => list.id === action.payload);
       state.splice(index, 1);
     },
+    resetLists() {
+      // const index = state.findIndex((list) => list.id === action.payload);
+      return initialState;
+    },
     updateListDescription(state, action: PayloadAction<{description: string; id: string}>) {
       const index = state.findIndex((list) => list.id === action.payload.id);
       state[index].description = action.payload.description;
@@ -30,5 +34,5 @@ const listReducer = createSlice({
   },
 });
 
-export const {removeList, updateListDescription, addList} = listReducer.actions;
+export const {removeList, updateListDescription, addList, resetLists} = listReducer.actions;
 export default listReducer.reducer;

@@ -3,9 +3,9 @@ import {Todo} from '../interface/todo';
 import {changePriority, changeStatus, removeTodo, updateDescription} from '../TodoReducer';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store';
-import {InputGroup, Checkbox, InputRightElement, InputLeftElement, Stack} from '@chakra-ui/react';
-
-import MyPopover from '../components/Popover';
+import {Checkbox} from '@chakra-ui/react';
+import TaskEdit from '../components/TaskEdit';
+import {ReactComponent as HandleIconn} from '../assets/icons/handle.svg';
 
 function TodoItem(todo: Todo) {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,11 +26,11 @@ function TodoItem(todo: Todo) {
     }
   }
 
-  function handlePriorityChange(e: any, id: string) {
-    if (!e.target.checked) {
-      dispatch(changePriority({priority: true, id}));
-    } else {
+  function handlePriorityChange(e: boolean, id: string) {
+    if (!e) {
       dispatch(changePriority({priority: false, id}));
+    } else {
+      dispatch(changePriority({priority: true, id}));
     }
   }
   const itemStyle = {
@@ -44,28 +44,7 @@ function TodoItem(todo: Todo) {
   };
 
   return (
-    // <Stack spacing={1} mb={2} key={todo.id}>
-    //   <InputGroup defaultValue="">
-    //     <InputLeftElement
-    //       style={{background: 'transparent'}}
-    //       children={<Checkbox onChange={(e) => handleStatusChange(e, todo.id)}></Checkbox>}
-    //     />
-    //     <TodoDescription
-    //       description={todo.description}
-    //       status={todo.status}
-    //       onChange={(e) => handleTextChange(e, todo.id)}
-    //     />
-    //     <InputRightElement style={{background: 'transparent'}}>
-    //       <MyPopover
-    //         changePriority={(e) => handlePriorityChange(e, todo.id)}
-    //         delete={() => dispatch(removeTodo(todo.id))}
-    //         dataType="task"
-    //       />
-    //     </InputRightElement>
-    //   </InputGroup>
-    // </Stack>
     <div key={todo.id} style={itemStyle}>
-      {/* <div style={priorityStyle}></div> */}
       <Checkbox
         isChecked={todo.status == 'completed'}
         onChange={(e) => handleStatusChange(e, todo.id)}
@@ -82,14 +61,14 @@ function TodoItem(todo: Todo) {
         status={todo.status}
         onChange={(e) => handleTextChange(e, todo.id)}
       />
-      <MyPopover
-        changePriority={(e) => handlePriorityChange(e, todo.id)}
+      <TaskEdit
+        icon={<HandleIconn />}
+        changePriority={(e: any) => handlePriorityChange(e.target.checked, todo.id)}
         delete={() => dispatch(removeTodo(todo.id))}
-        dataType="task"
+        priority={todo.priority}
       />
     </div>
   );
 }
 
 export default TodoItem;
-// children={}

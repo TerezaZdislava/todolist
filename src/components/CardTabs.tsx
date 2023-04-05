@@ -2,11 +2,12 @@ import {Tabs, Tab, TabIndicator, TabList} from '@chakra-ui/react';
 
 interface TabProps {
   onClick: any;
+  tabIndex: number;
 }
 
 function CardTabs(props: TabProps) {
   return (
-    <Tabs position="relative" variant="unstyled">
+    <Tabs ml="2" mb="2" position="relative" variant="unstyled" index={props.tabIndex}>
       <TabList>
         <Tab
           _selected={{color: 'blue.500'}}
