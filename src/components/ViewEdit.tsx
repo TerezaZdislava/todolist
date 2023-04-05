@@ -26,7 +26,7 @@ function ViewEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<MenuIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.viewAll}
         />
         <Text>View all tasks</Text>
@@ -37,7 +37,7 @@ function ViewEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<CheckIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.viewCompleted}
         />
         <Text>View completed tasks</Text>
@@ -48,7 +48,7 @@ function ViewEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<TodayIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.viewTodo}
         />
         <Text>View to-do tasks</Text>

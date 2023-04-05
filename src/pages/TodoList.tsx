@@ -1,13 +1,10 @@
 import {Divider, Text, Button, Flex, Spacer, Heading} from '@chakra-ui/react';
 import {useState} from 'react';
-
 import {useDispatch, useSelector} from 'react-redux';
-
 import {AppDispatch, RootState} from '../store';
 import {addList, resetLists} from '../reducer/ListReducer';
 import {removeTodo, resetTodos} from '../reducer/TodoReducer';
 import {Filter, List, Todo} from '../interface/todo';
-
 import TodoCard from '../features/Card';
 import ViewEdit from '../components/ViewEdit';
 import ClearEdit from '../components/ClearEdit';
@@ -54,26 +51,28 @@ function TodoList() {
 
   return (
     <>
-      <Flex p={4} w="100%" color="black" alignItems="end">
-        <Flex gap="2" alignItems="end">
-          <Heading size="md">Today</Heading>
-          <Text ml="2">{today}</Text>
+      <Flex w="100%" style={{position: 'fixed', top: '50px', zIndex: 10, flexDirection: 'column'}}>
+        <Flex p={4} w="100%" color="black" alignItems="end">
+          <Flex gap="2" alignItems="end">
+            <Heading size="md">Today</Heading>
+            <Text ml="2">{today}</Text>
+          </Flex>
+          <Spacer />
+          <ViewEdit
+            viewCompleted={() => setFilter('completed')}
+            viewTodo={() => setFilter('active')}
+            viewAll={() => setFilter('all')}
+            icon={<SettingsIcon />}
+          />
+          <ClearEdit
+            icon={<MenuIcon />}
+            clearAll={() => handleClearAll()}
+            clearDone={() => handleAllDone()}
+          />
         </Flex>
-        <Spacer />
-        <ViewEdit
-          viewCompleted={() => setFilter('completed')}
-          viewTodo={() => setFilter('active')}
-          viewAll={() => setFilter('all')}
-          icon={<SettingsIcon />}
-        />
-        <ClearEdit
-          icon={<MenuIcon />}
-          clearAll={() => handleClearAll()}
-          clearDone={() => handleAllDone()}
-        />
+        <Divider orientation="horizontal" ml={4} mr={4} w="auto" style={{color: '#DFE1E6'}} />
       </Flex>
-      <Divider orientation="horizontal" ml={4} mr={4} w="auto" style={{color: '#DFE1E6'}} />
-      <Flex p={4}>
+      <Flex p={4} style={{paddingTop: '130px'}}>
         {todoList.map((list: List) => (
           <TodoCard {...list} key={list.id} filter={filter} />
         ))}
@@ -83,11 +82,10 @@ function TodoList() {
               {!showCreateList ? (
                 <Button
                   style={{width: '100%'}}
-                  variant="contained"
-                  color="primary"
+                  variant="secondary"
                   onClick={() => setShowCreateList(true)}
                 >
-                  Add new list
+                  + Add new list
                 </Button>
               ) : null}
               {showCreateList ? (

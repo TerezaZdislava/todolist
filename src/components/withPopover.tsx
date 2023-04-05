@@ -10,7 +10,7 @@ import {
 
 const withPopover = (Component: React.FunctionComponent) => (props: any) => {
   const itemStyle = {
-    padding: '15px 8px 0px 8px',
+    padding: '20px 8px 5px 8px',
     border: '1px solid #DFE1E6',
     borderRadius: '8px',
   };
@@ -18,7 +18,7 @@ const withPopover = (Component: React.FunctionComponent) => (props: any) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <IconButton ml="2" aria-label="Search database" icon={props.icon} variant="primary" />
+        <IconButton variant="ghost" ml="2" aria-label="Search database" icon={props.icon} />
       </PopoverTrigger>
       <PopoverContent style={itemStyle}>
         <PopoverArrow />

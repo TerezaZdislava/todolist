@@ -107,7 +107,12 @@ function TodoCard(props: CardProps) {
           placeholder="Add item"
           style={{borderColor: '#B3BAC5'}}
         />
-        <Button ml={2} variant="contained" color="primary" onClick={() => addTask(props.id)}>
+        <Button
+          ml={2}
+          variant="primary"
+          isDisabled={taskDescription === ''}
+          onClick={() => addTask(props.id)}
+        >
           Add
         </Button>
       </CardFooter>

@@ -24,7 +24,7 @@ function CardEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<CheckIconn />}
-          variant="primary"
+          variant="ghost"
           onClick={props.allDone}
         />
         <Text>Mark all done</Text>
@@ -35,7 +35,7 @@ function CardEdit(props: Props) {
           mr="2"
           aria-label="delete"
           icon={<DeleteIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.delete}
         />
         <Text>Delete list</Text>

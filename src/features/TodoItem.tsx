@@ -44,7 +44,7 @@ function TodoItem(todo: Todo) {
     display: 'flex',
     marginBottom: '8px',
     border: '1px solid #DFE1E6',
-    borderLeft: `2px solid ${todo.priority ? 'red' : 'green'}`,
+    borderLeft: `2px solid ${todo.priority ? '#E32C1E' : '#24A148'}`,
     borderRadius: '5px',
     alignItems: 'center',
   };

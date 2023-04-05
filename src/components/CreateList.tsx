@@ -12,15 +12,15 @@ function CreateList(props: Props) {
     <>
       <Input
         onChange={props.onChange}
-        placeholder="Add item"
+        placeholder="Add new list"
         style={{borderColor: '#B3BAC5', backgroundColor: 'white'}}
       />
       <Flex gap="4" w="100%" justify="end" mt="3">
-        <Button variant="outline" color="primary" onClick={props.cancel}>
+        <Button variant="secondary" color="primary" onClick={props.cancel}>
           Cancel
         </Button>
-        <Button variant="contained" color="primary" onClick={props.add}>
-          Add Todo List
+        <Button variant="primary" onClick={props.add}>
+          Save
         </Button>
       </Flex>
     </>

@@ -23,9 +23,9 @@ const rowStyle = {
 function TaskEdit(props: Props) {
   return (
     <div>
-      <Input mb="2" onChange={props.onTitleChange} defaultValue={props.task?.title} />
+      <Input mb="4" onChange={props.onTitleChange} defaultValue={props.task?.title} />
       <Textarea
-        mb="2"
+        mb="4"
         defaultValue={props.task?.description}
         onChange={props.onDescriptionChange}
       />
@@ -45,7 +45,7 @@ function TaskEdit(props: Props) {
           mr="2"
           aria-label="delete"
           icon={<DeleteIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.delete}
         />
         <Text>Delete task</Text>

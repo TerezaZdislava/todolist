@@ -24,7 +24,7 @@ function ClearEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<MenuIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.clearAll}
         />
         <Text>Clear all</Text>
@@ -35,7 +35,7 @@ function ClearEdit(props: Props) {
           mr="2"
           aria-label="done"
           icon={<CheckIcon />}
-          variant="primary"
+          variant="ghost"
           onClick={props.clearDone}
         />
         <Text>Clear all done tasks</Text>

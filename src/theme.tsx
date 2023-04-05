@@ -24,10 +24,21 @@ const theme = extendTheme({
     Button: {
       baseStyle: () => ({
         bg: 'unset',
-        backgroundColor: '#EBECF0',
-        color: 'black',
         borderRadius: '4px',
+        fontWeight: '500',
       }),
+      variants: {
+        primary: {
+          bg: '#0065FF',
+          color: 'white',
+          fontSize: '14px',
+        },
+        secondary: {
+          bg: '#EBECF0',
+          color: 'black',
+          fontSize: '14px',
+        },
+      },
     },
   },
 });
