@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
-import todoReducer from './TodoReducer';
-import listReducer from './ListReducer';
+import todoReducer from './reducer/TodoReducer';
+import listReducer from './reducer/ListReducer';
 
 export const store = configureStore({
   reducer: {

@@ -1,6 +1,12 @@
 import TitleInput from '../components/TitleInput';
 import {Todo} from '../interface/todo';
-import {changePriority, changeStatus, removeTodo, updateDescription} from '../TodoReducer';
+import {
+  changePriority,
+  changeStatus,
+  removeTodo,
+  updateDescription,
+  updateTitle,
+} from '../reducer/TodoReducer';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../store';
 import {Checkbox} from '@chakra-ui/react';
@@ -10,11 +16,11 @@ import {ReactComponent as HandleIconn} from '../assets/icons/handle.svg';
 function TodoItem(todo: Todo) {
   const dispatch = useDispatch<AppDispatch>();
 
-  function handleTextChange(e: any, id: string) {
+  function handleTitleChange(e: any, taskid: string) {
     if (!e.target.value) {
-      dispatch(removeTodo(id));
+      dispatch(removeTodo(taskid));
     } else {
-      dispatch(updateDescription({description: e.target.value, id}));
+      dispatch(updateTitle({title: e.target.value, id: taskid}));
     }
   }
 
@@ -57,15 +63,20 @@ function TodoItem(todo: Todo) {
         size="lg"
       ></Checkbox>
       <TitleInput
-        description={todo.description}
+        title={todo.title}
         status={todo.status}
-        onChange={(e) => handleTextChange(e, todo.id)}
+        onChange={(e) => handleTitleChange(e, todo.id)}
       />
       <TaskEdit
         icon={<HandleIconn />}
+        task={todo}
+        onDescriptionChange={(e: any) =>
+          dispatch(updateDescription({description: e.target.value, id: todo.id}))
+        }
+        onTitleChange={(e: any) => dispatch(updateTitle({title: e.target.value, id: todo.id}))}
         changePriority={(e: any) => handlePriorityChange(e.target.checked, todo.id)}
         delete={() => dispatch(removeTodo(todo.id))}
-        priority={todo.priority}
+        // priority={todo.priority}
       />
     </div>
   );

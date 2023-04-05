@@ -1,8 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Status, Todo} from './interface/todo';
+import {Status, Todo} from '../interface/todo';
 
 const initialState = [] as Todo[];
 const {v4: uuidv4} = require('uuid');
+
+const time = new Date()
+  .toLocaleString('en', {weekday: 'short', day: 'numeric', month: 'short'})
+  .toString();
 
 const todoReducer = createSlice({
   name: 'todos',
@@ -12,14 +16,16 @@ const todoReducer = createSlice({
       reducer: (state, action: PayloadAction<Todo>) => {
         state.push(action.payload);
       },
-      prepare: (description: string, listId: string) => ({
+      prepare: (title: string, listId: string) => ({
         payload: {
           id: uuidv4(),
-          description,
+          description: '',
           listId,
           status: 'active',
           priority: false,
           completed: false,
+          timeCreated: time,
+          title,
         } as Todo,
       }),
     },
@@ -34,6 +40,10 @@ const todoReducer = createSlice({
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].description = action.payload.description;
     },
+    updateTitle(state, action: PayloadAction<{title: string; id: string}>) {
+      const index = state.findIndex((todo) => todo.id === action.payload.id);
+      state[index].title = action.payload.title;
+    },
     changeStatus(state, action: PayloadAction<{status: Status; id: string}>) {
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].status = action.payload.status;
@@ -45,6 +55,13 @@ const todoReducer = createSlice({
   },
 });
 
-export const {addTodo, resetTodos, removeTodo, changePriority, changeStatus, updateDescription} =
-  todoReducer.actions;
+export const {
+  addTodo,
+  updateTitle,
+  resetTodos,
+  removeTodo,
+  changePriority,
+  changeStatus,
+  updateDescription,
+} = todoReducer.actions;
 export default todoReducer.reducer;

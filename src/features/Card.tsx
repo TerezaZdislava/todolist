@@ -2,17 +2,27 @@ import {Button, Card, CardHeader, CardBody, CardFooter, Input} from '@chakra-ui/
 import TodoItem from './TodoItem';
 import {AppDispatch, RootState} from '../store';
 import {useDispatch, useSelector} from 'react-redux';
-import {addTodo, changeStatus} from '../TodoReducer';
+import {addTodo, changeStatus} from '../reducer/TodoReducer';
 import {Todo, List, Filter} from '../interface/todo';
 import TitleInput from '../components/TitleInput';
 import {useEffect, useState} from 'react';
-import {removeList, updateListDescription} from '../ListReducer';
+import {removeList, updateListTitle} from '../reducer/ListReducer';
 import CardTabs from '../components/CardTabs';
 import CardEdit from '../components/CardEdit';
 import {ReactComponent as HandleIconn} from '../assets/icons/handle.svg';
 interface CardProps extends List {
   filter: Filter;
 }
+
+const itemStyle = {
+  backgroundColor: 'white',
+  height: 'fit-content',
+  border: '1px solid ##DFE1E6',
+  borderRadius: '5px',
+  width: '350px',
+  flexShrink: 0,
+  margin: '10px',
+};
 
 function TodoCard(props: CardProps) {
   const dispatch = useDispatch<AppDispatch>();
@@ -69,24 +79,14 @@ function TodoCard(props: CardProps) {
     if (!e.target.value) {
       dispatch(removeList(id));
     } else {
-      dispatch(updateListDescription({description: e.target.value, id}));
+      dispatch(updateListTitle({title: e.target.value, id}));
     }
   }
-
-  const itemStyle = {
-    backgroundColor: 'white',
-    height: 'fit-content',
-    border: '1px solid ##DFE1E6',
-    borderRadius: '5px',
-  };
 
   return (
     <Card key={props.id} style={itemStyle}>
       <CardHeader display="flex" alignItems="center" justifyContent="space-between">
-        <TitleInput
-          description={props.description}
-          onChange={(e) => handleTitleChange(e, props.id)}
-        />
+        <TitleInput title={props.title} onChange={(e) => handleTitleChange(e, props.id)} />
         <CardEdit
           icon={<HandleIconn />}
           delete={() => dispatch(removeList(props.id))}

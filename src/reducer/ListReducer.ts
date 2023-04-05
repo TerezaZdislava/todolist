@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {List} from './interface/todo';
+import {List} from '../interface/todo';
 
 const initialState = [] as List[];
 const {v4: uuidv4} = require('uuid');
@@ -12,10 +12,10 @@ const listReducer = createSlice({
       reducer: (state, action: PayloadAction<List>) => {
         state.push(action.payload);
       },
-      prepare: (description: string) => ({
+      prepare: (title: string) => ({
         payload: {
           id: uuidv4(),
-          description,
+          title,
         } as List,
       }),
     },
@@ -27,12 +27,12 @@ const listReducer = createSlice({
       // const index = state.findIndex((list) => list.id === action.payload);
       return initialState;
     },
-    updateListDescription(state, action: PayloadAction<{description: string; id: string}>) {
+    updateListTitle(state, action: PayloadAction<{title: string; id: string}>) {
       const index = state.findIndex((list) => list.id === action.payload.id);
-      state[index].description = action.payload.description;
+      state[index].title = action.payload.title;
     },
   },
 });
 
-export const {removeList, updateListDescription, addList, resetLists} = listReducer.actions;
+export const {removeList, updateListTitle, addList, resetLists} = listReducer.actions;
 export default listReducer.reducer;

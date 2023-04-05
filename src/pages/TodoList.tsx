@@ -1,11 +1,11 @@
-import {Divider, SimpleGrid, Text, Button, Flex, Spacer, Heading} from '@chakra-ui/react';
+import {Divider, Text, Button, Flex, Spacer, Heading} from '@chakra-ui/react';
 import {useState} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
 
 import {AppDispatch, RootState} from '../store';
-import {addList, resetLists} from '../ListReducer';
-import {removeTodo, resetTodos} from '../TodoReducer';
+import {addList, resetLists} from '../reducer/ListReducer';
+import {removeTodo, resetTodos} from '../reducer/TodoReducer';
 import {Filter, List, Todo} from '../interface/todo';
 
 import TodoCard from '../features/Card';
@@ -73,12 +73,11 @@ function TodoList() {
         />
       </Flex>
       <Divider orientation="horizontal" ml={4} mr={4} w="auto" style={{color: '#DFE1E6'}} />
-
-      <SimpleGrid m={3} spacing={4} templateColumns="repeat(auto-fill, minmax(300px, 1fr))">
+      <Flex p={4}>
         {todoList.map((list: List) => (
           <TodoCard {...list} key={list.id} filter={filter} />
         ))}
-        <div>
+        <div style={{width: '350px', flexShrink: '0', margin: '10px'}}>
           {todoList.length > 0 ? (
             <>
               {!showCreateList ? (
@@ -107,7 +106,7 @@ function TodoList() {
             />
           )}
         </div>
-      </SimpleGrid>
+      </Flex>
     </>
   );
 }
